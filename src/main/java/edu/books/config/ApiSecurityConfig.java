@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.RememberMeAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,6 +35,7 @@ import lombok.extern.java.Log;
 @Log
 @EnableWebSecurity
 @Configuration
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private String tokenKey = "token_key";
@@ -92,7 +94,11 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
         // dont authenticate this particular request
-        .authorizeRequests().antMatchers("/api/admin/login", "/auth/login",  "/api/login/", "/api/logout", "/img/**").permitAll()
+        .authorizeRequests().antMatchers("/api/admin/login", 
+        		"/api/login/", 
+        		"/api/logout", 
+        		"/admin/books/index", 
+        		"/api/admin/bookListEnabled").permitAll()
         // all other requests need to be authenticated
         .antMatchers( "/api/**")
 				.permitAll().and()

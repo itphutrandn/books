@@ -14,7 +14,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BookForm {
-
+	
+	private Integer id;
+	
 	private String title;
 
 	private String author;
@@ -22,7 +24,9 @@ public class BookForm {
 	private String description;
 
 	private String enabled;
+	
+	private String delImg;
 
 	private MultipartFile avatar;
-
+	
 }

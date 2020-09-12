@@ -12,6 +12,12 @@ public class UrlConstants {
     
     public static final String URL_BOOK = "/books";
     
+    public static final String URL_ACTIVE_BOOK = "/books/active";
+    
+    public static final String URL_BOOK_LIST = "/bookList";
+    
+    public static final String URL_BOOK_LIST_ENABLED = "/bookListEnabled";
+    
     public static final String URL_MY_BOOK = "/books/mybooks";
     
     public static final String URL_CREATE_BOOK = "/books/create";

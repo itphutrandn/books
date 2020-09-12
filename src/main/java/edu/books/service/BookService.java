@@ -1,10 +1,13 @@
 package edu.books.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
 import edu.books.domain.Book;
+import edu.books.model.BookAdminEnabledResponse;
 import edu.books.model.BookAdminResponse;
 
 public interface BookService {
@@ -24,4 +27,10 @@ public interface BookService {
 	void delete(int id);
 	
 	void delete(int bookId, int userId);
+	
+	List<BookAdminResponse> getAllByUserId(Integer userId);
+	
+	List<BookAdminEnabledResponse> getListEnabled();
+	
+	void active(String enable, Integer id);
 }

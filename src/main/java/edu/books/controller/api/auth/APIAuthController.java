@@ -1,6 +1,8 @@
 package edu.books.controller.api.auth;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +26,7 @@ import edu.books.base.AbstractController;
 import edu.books.config.JwtTokenUtil;
 import edu.books.constant.CommonConstants;
 import edu.books.constant.UrlConstants;
+import edu.books.domain.Role;
 import edu.books.domain.User;
 import edu.books.model.JwtRequest;
 import edu.books.model.JwtResponse;
@@ -52,7 +55,6 @@ public class APIAuthController extends AbstractController {
     @Autowired
     private UserService userService;
 
-
     @SuppressWarnings({"unchecked", "rawtypes"})
 	@PostMapping(value =  UrlConstants.URL_AUTH_LOGIN)
     @ApiOperation(value = "Login", response = Object.class)
@@ -62,13 +64,14 @@ public class APIAuthController extends AbstractController {
             @RequestHeader(value = "Authorization", required = false, defaultValue = "") String authorization) throws NoSuchMessageException, Exception {
         log.info("Call API login");
         User user = userService.findByEmailAndPassword(authenticationRequest.getEmail(), authenticationRequest.getPassword());
+       
         if (user == null) {
             throw new Exception(messageSource.getMessage("api.admin.login.wrong", new String[]{}, null), null);
         }
         if(CommonConstants.DEACTIVE.equals(user.getEnabled())) {
         	 throw new Exception(messageSource.getMessage("api.admin.login.disabled", new String[]{}, null), null);
         }
-        
+        List<Role> roles = new ArrayList<>(user.getRoles());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
         final String token = jwtTokenUtil.generateToken(userDetails);
         
@@ -81,7 +84,9 @@ public class APIAuthController extends AbstractController {
         user.setConfirmPassword("");
         user.setPassword("");
         resultLogin.put("user", user);
+        resultLogin.put("role", roles);
         request.getSession().setAttribute("userInfo", user);
+        request.getSession().setAttribute("roles", roles);
         ResponseAPI responseAPI = new ResponseAPI(HttpStatus.SC_OK, "OK", resultLogin);
         return responseAPI;
     }
@@ -91,9 +96,11 @@ public class APIAuthController extends AbstractController {
         if(session.getAttribute("userInfo") != null) {
         	User user =  (User)session.getAttribute("userInfo");
         	userService.updateToken(null, user.getEmail());
+        	session.removeAttribute("userInfo");
         }
-    	session.removeAttribute("userInfo");
-        //session.removeAttribute("roles");
+        if(session.getAttribute("roles") != null) {
+        	session.removeAttribute("roles");
+        }
         ResponseAPI responseAPI = new ResponseAPI(HttpStatus.SC_OK, "OK", null);
         return responseAPI;
     }

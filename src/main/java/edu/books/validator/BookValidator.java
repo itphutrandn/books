@@ -30,7 +30,7 @@ public class BookValidator extends AbstractThrowableValidator<BookForm, IllegalA
 		existingValidator.validateNullOrEmpty(book.getEnabled(), " Enabled");
 	}
 
-	public void validateUpdate(Book book) throws IllegalArgumentException {
+	public void validateUpdate(BookForm book) throws IllegalArgumentException {
 		existingValidator.validateNullOrEmpty(book.getId(), " Id");
 		isTrue(isNumeric(String.valueOf(book.getId())), "Id must integer");
 		existingValidator.validateNullOrEmpty(book.getTitle(), " Title");

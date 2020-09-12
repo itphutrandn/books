@@ -1,5 +1,7 @@
 package edu.books.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.books.domain.Book;
+import edu.books.model.BookAdminEnabledResponse;
 import edu.books.model.BookAdminResponse;
 import edu.books.repository.BookRepository;
 import lombok.extern.log4j.Log4j2;
@@ -55,4 +58,21 @@ public class BookServiceImpl implements BookService {
 	public void delete(int bookId, int userId) {
 		bookRepository.delete(bookId, userId);
 	}
+
+	@Override
+	public List<BookAdminResponse> getAllByUserId(Integer userId) {
+		return bookRepository.getSearchAllBook(userId);
+	}
+
+	@Override
+	public void active(String enable, Integer id) {
+		bookRepository.active(enable, id);
+	}
+
+	@Override
+	public List<BookAdminEnabledResponse> getListEnabled() {
+		return bookRepository.getListEnabled();
+	}
+
+	
 }

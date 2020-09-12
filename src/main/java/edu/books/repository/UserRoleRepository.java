@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import edu.books.domain.Role;
 import edu.books.domain.User;
 import edu.books.domain.UserRole;
+import edu.books.model.BookAdminEnabledResponse;
 
 @Repository
 public interface UserRoleRepository extends JpaRepository<UserRole, Integer>, JpaSpecificationExecutor<UserRole> {
