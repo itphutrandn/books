@@ -33,4 +33,6 @@ public interface BookService {
 	List<BookAdminEnabledResponse> getListEnabled();
 	
 	int active(String enable, Integer id);
+	
+	BookAdminResponse getBookAndUser(@Param("userId") Integer userId, @Param("userId") Integer bookId);
 }

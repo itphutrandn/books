@@ -157,8 +157,16 @@ public class APIAdminBookController extends AbstractController {
 
 	@RequestMapping(value = UrlConstants.URL_DETAIL_BOOK, method = RequestMethod.GET)
 	@ApiOperation(value = "Get detail book", response = Object.class)
-	public ResponseAPI detail(@PathVariable Integer id) throws Exception {
+	public ResponseAPI detail(@PathVariable Integer id,HttpServletRequest request, 
+			@RequestHeader(value = "Authorization", required = false, defaultValue = "") String authorization) throws Exception {
 		Book book = bookService.findById(id);
+		User currentUser = currentUser(authorization);
+		if (!userInfoHandler.isAdmin(request.getSession())) {
+			BookAdminResponse bookAndUser = bookService.getBookAndUser(currentUser.getId(), book.getId());
+			if(bookAndUser == null) {
+				throw new Exception(messageSource.getMessage("api.admin.book.notaccess", new String[] {}, null), null);
+			}
+		}
 		if (book != null) {
 			HashMap<String, Object> data = new HashMap<>();
 			data.put("book", book);
@@ -216,6 +224,12 @@ public class APIAdminBookController extends AbstractController {
 		User currentUser = currentUser(authorization);
 		ObjectUtil.removeEmptyField(book);
 		if (currentUser != null) {
+			if (!userInfoHandler.isAdmin(request.getSession())) {
+				BookAdminResponse bookAndUser = bookService.getBookAndUser(currentUser.getId(), book.getId());
+				if(bookAndUser == null) {
+					throw new Exception(messageSource.getMessage("api.admin.book.notaccess", new String[] {}, null), null);
+				}
+			}
 			book.setAuthor(currentUser.getFirstName() + " "+ currentUser.getLastName());
 			Book checkBook = bookService.findById(book.getId());
 			book.setEnabled(checkBook.getEnabled());
@@ -276,6 +290,13 @@ public class APIAdminBookController extends AbstractController {
 				throw new Exception(messageSource.getMessage("api.admin.book.notexist", new String[] {}, null), null);
 			}
 			User currentUser = currentUser(authorization);
+			
+			if (!userInfoHandler.isAdmin(request.getSession())) {
+				BookAdminResponse bookAndUser = bookService.getBookAndUser(currentUser.getId(), book.getId());
+				if(bookAndUser == null) {
+					throw new Exception(messageSource.getMessage("api.admin.book.notaccess", new String[] {}, null), null);
+				}
+			}
 			if(!"".equals(book.getImage())) {
 				deleteFile(book.getImage(), request);
 			}

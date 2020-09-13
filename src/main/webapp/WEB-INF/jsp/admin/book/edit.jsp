@@ -110,7 +110,8 @@
 	     	 	} 
 	      	}, 
 		    error: function(xhr, status, error) {
-		    	window.location = "/auth/login";
+		    	alert(JSON.parse(xhr.responseText).text);
+		    	window.location = "/news";
 			}
 		});
 	});

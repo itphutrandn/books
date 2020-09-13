@@ -74,5 +74,10 @@ public class BookServiceImpl implements BookService {
 		return bookRepository.getListEnabled();
 	}
 
+	@Override
+	public BookAdminResponse getBookAndUser(Integer userId, Integer bookId) {
+		return bookRepository.getBookAndUser(userId, bookId);
+	}
+
 	
 }

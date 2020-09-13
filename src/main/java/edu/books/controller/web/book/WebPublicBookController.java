@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebPublicBookController {
 
-	@GetMapping("news")
+	@GetMapping({"news", ""})
 	public String index() {
 		return "news/news";
 	}

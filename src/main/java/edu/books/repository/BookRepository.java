@@ -39,6 +39,12 @@ public interface BookRepository extends JpaRepository<Book, Integer>,
     List<BookAdminResponse> getSearchAllBook(@Param("userId") Integer userId);
     
     @Query(value =
+            "SELECT new edu.books.model.BookAdminResponse(b.id, b.title, b.author, b.enabled) "+
+            "FROM Book b INNER JOIN BookUser bu ON bu.book.id = b.id INNER JOIN User u ON u.id = bu.user.id " +
+            "WHERE  u.id = :userId AND  b.id = :bookId")
+    BookAdminResponse getBookAndUser(@Param("userId") Integer userId, @Param("userId") Integer bookId);
+    
+    @Query(value =
             "SELECT new edu.books.model.BookAdminEnabledResponse(b.id, b.title, b.author, b.enabled, b.image, b.description) "+
             "FROM Book b INNER JOIN BookUser bu ON bu.book.id = b.id  WHERE b.enabled = 1 ORDER BY b.id DESC")
     List<BookAdminEnabledResponse> getListEnabled();

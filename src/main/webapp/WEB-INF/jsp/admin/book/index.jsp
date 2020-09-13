@@ -181,7 +181,8 @@ function handleDeleteBook(bookId) {
 	     	 	} 
 	      	}, 
 		    error: function(xhr, status, error) {
-		    	alert('Fail');
+		    	alert(JSON.parse(xhr.responseText).text);
+		    	window.location = "/news";
 			}
 		});
 	}

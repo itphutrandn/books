@@ -50,7 +50,7 @@ public class Book extends Auditable {
 	@ApiModelProperty(notes = "author")
     private String author;
 	
-	@Column(name="description")
+	@Column(name="description", columnDefinition = "TEXT")
 	@ApiModelProperty(notes = "description")
     private String description;
 	
