@@ -251,6 +251,7 @@ public class APIAdminBookController extends AbstractController {
 				bookSave.setUsers(users);
 				checkBook.setTitle(bookSave.getTitle());
 				checkBook.setDescription(bookSave.getDescription());
+				checkBook.setEnabled(bookSave.getEnabled());
 				checkBook.setImage(bookSave.getImage());
 				bookService.save(checkBook);
 				isCreate = true;
