@@ -16,7 +16,7 @@ function logout() {
 		}
 	});
 }
-
+//INDEX
 $( document ).ready(function() {
 	$("#wait").css("display", "block");
 	$(function () {
