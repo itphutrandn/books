@@ -193,7 +193,7 @@ public class APIAdminBookController extends AbstractController {
 			Book bookSave = bookConverter.convert(book);
 			try {
 				if (book.getAvatar() != null
-						&& !StringUtils.isEmpty(FilenameUtils.getExtension(book.getAvatar().getOriginalFilename()))) {
+						&& !StringUtils.isEmpty(book.getAvatar().getOriginalFilename())) {
 					image = upload(book.getAvatar(), request);
 				}
 				bookSave.setImage(image);
