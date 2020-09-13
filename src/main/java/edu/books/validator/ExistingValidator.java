@@ -34,7 +34,7 @@ public class ExistingValidator  {
     public void validateNullOrEmpty(Object object, String objectName) throws IllegalArgumentException {
         isTrue((object != null), objectName + " not empty");
         if(object != null) {
-            isTrue((!"0".equals(object.toString()) && !"".equals(object.toString()) ), objectName + " not empty");
+            isTrue((!"".equals(object.toString()) ), objectName + " not empty");
         }
     }
 }

@@ -127,9 +127,7 @@ public class APIAdminBookController extends AbstractController {
 		User currentUser = currentUser(authorization);
 		HashMap<String, Object> data = new HashMap<>();
 		if (currentUser != null) {
-			if (userInfoHandler.isAdmin(session)) {
-				bookService.active(bookRequest.getEnabled(), bookRequest.getBookId());
-			} 
+			bookService.active(bookRequest.getEnabled(), bookRequest.getBookId());
 			data.put("enabled", bookRequest.getEnabled());
 		}
 		return new ResponseAPI(HttpStatus.SC_OK, null, data);
@@ -219,8 +217,9 @@ public class APIAdminBookController extends AbstractController {
 		ObjectUtil.removeEmptyField(book);
 		if (currentUser != null) {
 			book.setAuthor(currentUser.getFirstName() + " "+ currentUser.getLastName());
-			bookValidator.validateUpdate(book);
 			Book checkBook = bookService.findById(book.getId());
+			book.setEnabled(checkBook.getEnabled());
+			bookValidator.validateUpdate(book);
 			if (checkBook == null) {
 				throw new Exception(messageSource.getMessage("api.admin.book.notexist", new String[] {}, null), null);
 			}
@@ -251,7 +250,6 @@ public class APIAdminBookController extends AbstractController {
 				bookSave.setUsers(users);
 				checkBook.setTitle(bookSave.getTitle());
 				checkBook.setDescription(bookSave.getDescription());
-				checkBook.setEnabled(bookSave.getEnabled());
 				checkBook.setImage(bookSave.getImage());
 				bookService.save(checkBook);
 				isCreate = true;

@@ -64,5 +64,5 @@ public interface BookRepository extends JpaRepository<Book, Integer>,
     @Query(value = "UPDATE book SET enabled = ? WHERE id = ?", nativeQuery = true)
     @Modifying(clearAutomatically=true, flushAutomatically = true)
     @Transactional
-    void active(String enabled, int id);
+    int active(String enabled, int id);
 }

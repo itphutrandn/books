@@ -32,5 +32,5 @@ public interface BookService {
 	
 	List<BookAdminEnabledResponse> getListEnabled();
 	
-	void active(String enable, Integer id);
+	int active(String enable, Integer id);
 }

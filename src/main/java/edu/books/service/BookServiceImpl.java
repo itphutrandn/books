@@ -65,8 +65,8 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void active(String enable, Integer id) {
-		bookRepository.active(enable, id);
+	public int active(String enable, Integer id) {
+		return bookRepository.active(enable, id);
 	}
 
 	@Override
