@@ -51,14 +51,6 @@
                 <textarea id="bkDes" class="form-control" rows="4"></textarea>
               </div>
               <div class="form-group">
-                <label for="inputStatus">Status</label>
-                <select class="form-control custom-select" id="bkStatus">
-                  <option selected value="">Select status</option>
-                  <option value="1">Enable</option>
-                  <option value="0">Disable</option>
-                </select>
-              </div>
-              <div class="form-group">
                 <label for="inputClientCompany">Image</label>
                 <input type="file" id="bkImg" class="form-control">
                 <div id="bkImgDes" style="margin-top:10px;"></div>
@@ -94,6 +86,7 @@
 	     	 	if(result.code == '200') {
 	     	 		var book = result.data.book;
 	     	 		str = '';
+	     	 		/*
 	     	 		if(book.enabled == '1') {
 	     	 			str =  '<option  value="">Select status</option>';
 	     	 			str += '<option value="1" selected>Enable</option>';
@@ -103,6 +96,7 @@
 	     	 			str += '<option value="1">Enable</option>';
 	     	 			str += '<option value="0" selected>Disable</option>';
 	     	 		}
+	     	 		*/
 	     	 		$("#bkName").val(book.title);
 	     	 		$("#bkId").val(book.id);
 	     	 		$("#bkDes").val(book.description);
@@ -140,7 +134,7 @@
 		var enabled = $("#bkStatus").find(":selected").val();
 		formData.append('title', title);
 		formData.append('description', des);
-		formData.append('enabled', enabled);
+		//formData.append('enabled', enabled);
 		formData.append('id', bookId);
 		formData.append('delImg', delImg);
 		
