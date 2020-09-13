@@ -61,6 +61,7 @@
 	</div>
 
 	<div id="dropDownSelect1"></div>
+	<div id="wait" style="display:none;width:106px;height:106px;position:absolute;top:50%;left:50%;padding:2px;z-index:2"><img src='/resources/templates/demo_wait.gif' width="100" height="100" /></div>
 	
 <!--===============================================================================================-->
 	<script src="/resources/auth/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -78,42 +79,6 @@
 	<script src="/resources/auth/vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="/resources/auth/js/main.js"></script>
-	<script>
-		$(document).ready(function() {
-			if (localStorage.getItem("token") != null && localStorage.getItem("userInfo") ) {
-				console.log(localStorage.getItem("token"));
-				window.location = "/admincp/books/index";
-				return;
-			}
-		});
-		
-		function handleLogin() {
-			var email = $("#email").val();
-			var pwd = $("#pwd").val();
-			var data = {
-				"email" : email,
-				"password": pwd
-			}
-			$.ajax({
-				url: "/api/admin/login", 
-				type: "POST",
-				dataType : "json",
-				contentType: "application/json; charset=utf-8",
-				data : JSON.stringify(data),
-				success: function(result){
-		     	 	if(result.code == '200') {
-		     	 		console.log(result);
-		     	 		localStorage.setItem("token",result.data.access_token);
-		     	 		localStorage.setItem("userInfo",JSON.stringify(result.data));
-		     	 		window.location = "/admincp/books/index";
-		     	 		return;
-		     	 	} 
-		      	}, 
-	    	    error: function(xhr, status, error) {
-	    	    	$("#loginFail").text(JSON.parse(xhr.responseText).text);
-	    		}
-			});
-		}
-	</script>
+	<script src="/resources/templates/admin/js/login.js"></script>
 </body>
 </html>

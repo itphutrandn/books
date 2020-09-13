@@ -5,7 +5,7 @@
 	version="4.0">
 	<display-name>books</display-name>
 	<welcome-file-list>
-		<welcome-file>/news</welcome-file>
+		<welcome-file>/home</welcome-file>
 	</welcome-file-list>
 
 	<error-page>

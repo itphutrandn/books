@@ -29,28 +29,5 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/resources/templates/admin/dist/js/demo.js"></script>
 <script src="/resources/templates/auth.js"></script>
-<!-- page script -->
-<script>
-</script>
-
-<script>
-	function logout() {
-		$.ajax({
-			url: "/api/admin/logout", 
-			type: "GET",
-			success: function(result){
-				console.log(result);
-	     	 	if(result.code == '200') {
-	     	 		localStorage.removeItem("token");
-	     	 		localStorage.removeItem("userInfo");
-	     	 		window.location = "/auth/login";
-	     	 		return;
-	     	 	} 
-	      	}, 
-    	    error: function(xhr, status, error) {
-    	    	window.location = "/auth/login";
-    		}
-		});
-	}
-</script>
+<script src="/resources/templates/admin/js/index.js"></script>
 </body>

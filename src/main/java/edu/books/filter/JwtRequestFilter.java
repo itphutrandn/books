@@ -41,7 +41,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 !request.getServletPath().contains("admincp") && 
                 !request.getServletPath().contains("news") && 
                 !request.getServletPath().contains("bookListEnabled") && 
-                !request.getServletPath().contains("error-book")) {
+                !request.getServletPath().contains("error-book") && 
+                !request.getServletPath().contains("")) {
             User user = userService.findByToken(requestTokenHeader);
             if (user == null) {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN,

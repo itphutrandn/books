@@ -11,12 +11,13 @@
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="/resources/templates/admin/dist/css/adminlte.min.css">
 </head>
-<body>
-<div id="wrapper">
+<body style="background: aliceblue;">
+<div id="wrapper" style="width: 80% !important;
+    margin: 20px auto;">
   <div id="wrapper2">
     <div id="header">
       <div id="logo">
-        <h1>Book List</h1>
+        <h1>Book List Project Demo | <img style="width:40px;" src="/resources/uploads/hinh1.jpg" /> Open Web Technology</h1>
       </div>
     </div>
     <div id="page">
@@ -25,8 +26,8 @@
           <thead>
 	          <tr>
 	            <th width="5%">Id</th>
-	            <th width="20%">Title</th>
-	            <th width="10%">Author</th>
+	            <th width="20%" class="sorting_asc">Title (Sort)</th>
+	            <th width="10%" >Author (Sort)</th>
 	            <th width="30%">Description</th>
 	            <th width="10%">Image</th>
 	          </tr>

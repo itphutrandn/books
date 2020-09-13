@@ -73,42 +73,5 @@
     </section>
     <!-- /.content -->
   </div>
-  
-  <script>
-  
-	function addBook() {
-		var file = $('#bkImg')[0].files[0];
-		var formData = new FormData();
-		if (file != null){
-			formData.append('avatar', file);
-		}
-		var title = $("#bkName").val();
-		var des = $("#bkDes").val();
-		var enabled = $("#bkStatus").find(":selected").val();
-		formData.append('title', title);
-		formData.append('description', des);
-		formData.append('enabled', enabled);
-		$.ajax({
-			url: "/api/admin/books/create", 
-			type: "POST",
-			dataType : "json",
-			data : formData,
-	    	contentType: false,
-            processData: false,
-			beforeSend: function (xhr) {
-	  		    xhr.setRequestHeader ("Authorization", localStorage.getItem('token'));
-	  		},
-			success: function(result){
-	     	 	if(result.code == '200') {
-	     	 		alert('Add Book Successfully!');
-	     	 		window.location = "/admincp/books/index";
-	     	 		return;
-	     	 	} 
-	      	},
-	      	error: function(xhr, status, error) {
-		    	$("#errorMsg").text(JSON.parse(xhr.responseText).text);
-			}
-		});
-	}
-		</script>
+  <div id="wait" style="display:none;width:106px;height:106px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='/resources/templates/demo_wait.gif' width="100" height="100" /><br>Loading..</div>
 <%@include file="/WEB-INF/jsp/templates/admin/inc/footer.jsp" %>
