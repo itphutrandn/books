@@ -74,5 +74,5 @@
     <!-- /.content -->
   </div>
   <div id="wait" style="display:none;width:106px;height:106px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='/resources/templates/demo_wait.gif' width="100" height="100" /><br>Loading..</div>
-<script src="/resources/templates/admin/js/add.js"></script>
 <%@include file="/WEB-INF/jsp/templates/admin/inc/footer.jsp" %>
+<script src="/resources/templates/admin/js/add.js"></script>
