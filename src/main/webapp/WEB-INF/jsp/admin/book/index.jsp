@@ -111,7 +111,9 @@ $( document ).ready(function() {
 	  		"dataSrc": function ( json ) {
                 return json.data.books;
 	  	    },error: function(xhr, status, error) {
-	  	    	alert('Fail');
+	  	    	localStorage.removeItem("token");
+	 	 		localStorage.removeItem("userInfo");
+	 	 		window.location = "/login";
 	  	    	return;
     		}
 	      },
@@ -154,7 +156,9 @@ function handleAvtive(status, bookId) {
     		}
       	}, 
 	    error: function(xhr, status, error) {
-	    	alert('Fail');
+	    	localStorage.removeItem("token");
+ 	 		localStorage.removeItem("userInfo");
+ 	 		window.location = "/login";
   	    	return;
 		}
 	});
@@ -182,6 +186,8 @@ function handleDeleteBook(bookId) {
 	      	}, 
 		    error: function(xhr, status, error) {
 		    	alert(JSON.parse(xhr.responseText).text);
+		    	localStorage.removeItem("token");
+     	 		localStorage.removeItem("userInfo");
 		    	window.location = "/news";
 			}
 		});

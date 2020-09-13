@@ -111,6 +111,8 @@
 	      	}, 
 		    error: function(xhr, status, error) {
 		    	alert(JSON.parse(xhr.responseText).text);
+		    	localStorage.removeItem("token");
+	 	 		localStorage.removeItem("userInfo");
 		    	window.location = "/news";
 			}
 		});
