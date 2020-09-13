@@ -54,6 +54,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                         messageSource.getMessage("api.permission.fail", new String[]{}, null));
                 return;
             }
+            request.setAttribute("userInfo", bUser);
         }
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "*");
