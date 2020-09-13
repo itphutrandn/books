@@ -93,3 +93,4 @@
 </div>
 <!-- /.content-wrapper -->
 <%@include file="/WEB-INF/jsp/templates/admin/inc/footer.jsp"%>
+<script src="/resources/templates/admin/js/detail.js"></script>

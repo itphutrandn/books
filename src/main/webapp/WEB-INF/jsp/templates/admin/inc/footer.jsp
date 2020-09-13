@@ -28,6 +28,5 @@
 <script src="/resources/templates/admin/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/resources/templates/admin/dist/js/demo.js"></script>
-<script src="/resources/templates/admin/js/index.js"></script>
 <script src="/resources/templates/auth.js"></script>
 </body>
