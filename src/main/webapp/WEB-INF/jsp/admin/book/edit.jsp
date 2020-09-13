@@ -108,7 +108,7 @@
 	     	 		$("#bkDes").val(book.description);
 	     	 		$("#bkStatus").html(str);
 	     	 		if(book.image != '' && book.image != null) {
-	     	 			$("#bkImgDes").html('<img style="width:230px;height:150px;" src="/resources/uploads/'+book.image+'" /> <br /> <input type="checkbox" name="delImg" id="delImg" value="1" /> Delete image');
+	     	 			$("#bkImgDes").html('<img style="width:230px;height:150px;" src="/resources/uploads/'+book.image+'" /> <br /> <input type="checkbox" name="delImg" id="delImg" value="0" /> Delete image');
 	     	 		} else {
 	     	 			$("#bkImgDes").html('No image');
 	     	 		}
@@ -126,9 +126,15 @@
 		var bookId = url_string.substring(url_string.lastIndexOf('/') + 1);
 		var file = $('#bkImg')[0].files[0];
 		var formData = new FormData();
+		var delImg = 0;
 		if (file != null){
 			formData.append('avatar', file);
 		}
+		
+		$('input[name="delImg"]:checked').each(function() {
+			delImg = 1;
+		});
+		
 		var title = $("#bkName").val();
 		var des = $("#bkDes").val();
 		var enabled = $("#bkStatus").find(":selected").val();
@@ -136,7 +142,8 @@
 		formData.append('description', des);
 		formData.append('enabled', enabled);
 		formData.append('id', bookId);
-		formData.append('delImg', $("#delImg").val());
+		formData.append('delImg', delImg);
+		
 		$.ajax({
 			url: "/api/admin/books/update", 
 			type: "POST",
