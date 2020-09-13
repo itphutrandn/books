@@ -2,13 +2,16 @@ package edu.books.repository;
 
 import java.util.List;
 
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.books.domain.Book;
 import edu.books.model.BookAdminEnabledResponse;
@@ -54,8 +57,12 @@ public interface BookRepository extends JpaRepository<Book, Integer>,
     Book findById(int id);
     
     @Query(value = "DELETE FROM book_user WHERE book_id = ? AND user_id = ?", nativeQuery = true)
+    @Modifying(clearAutomatically=true, flushAutomatically = true)
+    @Transactional
     void delete(int bookId, int userId);
     
     @Query(value = "UPDATE book SET enabled = ? WHERE id = ?", nativeQuery = true)
+    @Modifying(clearAutomatically=true, flushAutomatically = true)
+    @Transactional
     void active(String enabled, int id);
 }

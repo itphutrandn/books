@@ -7,8 +7,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.books.domain.User;
 
@@ -25,14 +27,20 @@ public interface UserRepository extends JpaRepository<User, Integer>, //
 	User findById(int id);
 
 	@Query(value = "UPDATE user SET deleted_at = CURRENT_TIMESTAMP() WHERE Id = ?", nativeQuery = true)
+    @Modifying(clearAutomatically=true, flushAutomatically = true)
+    @Transactional
 	User updateDeleteAt(int id);
-
+	
 	User findByEmail(String email);
 
 	@Query(value = "UPDATE user SET token = ? WHERE email = ?", nativeQuery = true)
-	User updateToken(String token, String email);
+    @Modifying(clearAutomatically=true, flushAutomatically = true)
+    @Transactional
+	void updateToken(String token, String email);
 
 	@Query(value = "UPDATE user SET last_used = CURRENT_TIMESTAMP() WHERE name = ?", nativeQuery = true)
+    @Modifying(clearAutomatically=true, flushAutomatically = true)
+    @Transactional
 	User updateLastUsed(String name);
 
 	User findByToken(String token);

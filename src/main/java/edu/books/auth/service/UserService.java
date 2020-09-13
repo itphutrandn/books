@@ -28,7 +28,7 @@ public interface UserService {
 
 	User findByEmail(String email);
 
-    User updateToken(String token, String name);
+    void updateToken(String token, String name);
 
     User updateLastUsed(String name);
 

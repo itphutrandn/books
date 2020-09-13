@@ -38,8 +38,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User updateToken(String token, String name) {
-		return userRepository.updateToken(token, name);
+	public void updateToken(String token, String name) {
+		 userRepository.updateToken(token, name);
 	}
 
 	@Override

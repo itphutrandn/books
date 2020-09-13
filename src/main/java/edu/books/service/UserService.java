@@ -10,7 +10,7 @@ public interface UserService {
 
 	User findByEmail(String email);
 
-	User updateToken(String token, String email);
+	void updateToken(String token, String email);
 	
 	User findByToken(String token);
 }
