@@ -32,6 +32,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
+    	/*
         final String requestTokenHeader = request.getHeader("Authorization");
         if (!request.getServletPath().contains("login") &&
                 !request.getServletPath().contains("logout") &&
@@ -54,11 +55,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                         messageSource.getMessage("api.permission.fail", new String[]{}, null));
                 return;
             }
-            request.setAttribute("userInfo", bUser);
         }
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "*");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, x-requested-with, X-Custom-Header, X-Access-Token");
+        */
         chain.doFilter(request, response);
     }
 
