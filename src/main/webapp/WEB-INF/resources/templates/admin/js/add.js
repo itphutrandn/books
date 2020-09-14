@@ -30,6 +30,7 @@ function addBook() {
 	     	 	} 
 	      	},
 	      	error: function(xhr, status, error) {
+	      		$("#wait").css("display", "none");
 		    	$("#errorMsg").text(JSON.parse(xhr.responseText).text);
 			}
 		});
